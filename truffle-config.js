@@ -23,6 +23,10 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+var HDWalletProvider = require("truffle-hdwallet-provider");  // 导入模块
+var mnemonic = "mix dash enrich october zero meadow auction razor tilt chuckle organ include";
+
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -45,6 +49,15 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
+    },
+    ropsten: {
+      provider: function() {
+          // mnemonic表示MetaMask的助记词。 "ropsten.infura.io/v3/33..."表示Infura上的项目id
+          return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/165ca4646d364f7e86fe71110136b37d", 1);   // 1表示第二个账户(从0开始)
+      },
+      network_id: "*",  // match any network
+      gas: 3012388,
+      gasPrice: 30000000000
     }
     // Another network with more advanced options...
     // advanced: {
